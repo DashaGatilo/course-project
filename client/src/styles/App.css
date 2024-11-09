@@ -1,0 +1,241 @@
+/* Общие стили */
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.app-header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.app-header__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-header__title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.app-header__buttons {
+  display: flex;
+}
+
+.app-navbar {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.app-navbar__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-navbar__logo {
+  display: flex;
+  align-items: center;
+}
+
+.app-navbar__logo img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.app-navbar__menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.app-navbar__menu-item {
+  margin-left: 20px;
+}
+
+.app-navbar__button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.app-navbar__button:hover {
+  background-color: #0069d9;
+}
+
+.app-main {
+  padding: 20px;
+}
+
+.app-category {
+  padding: 20px;
+}
+
+.app-category__title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.app-category__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.app-category-grid-item {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.app-category-grid-item__title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.app-banner {
+  background-color: #f8f9fa;
+  padding: 20px;
+  text-align: center;
+}
+
+.app-banner__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.app-banner__title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.app-banner__description {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.app-banner__button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.app-banner__button:hover {
+  background-color: #218838;
+}
+
+.app-login {
+  padding: 20px;
+  text-align: center;
+}
+
+.app-login__title {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.app-login__form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.app-login__input-group {
+  margin-bottom: 15px;
+}
+
+.app-login__label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.app-login__input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.app-login__button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.app-login__button:hover {
+  background-color: #0069d9;
+}
+
+.app-admin {
+  padding: 20px;
+  text-align: center;
+}
+
+.app-admin__title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.app-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.app-loader__spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.app-notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
