@@ -1,3 +1,4 @@
+import { Button, Input } from 'antd';
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -23,7 +24,7 @@ function Login() {
       <h2>Вход</h2>
       <div>
         <label htmlFor="username">Имя пользователя:</label>
-        <input
+        <Input
           type="text"
           id="username"
           value={username}
@@ -32,14 +33,14 @@ function Login() {
       </div>
       <div>
         <label htmlFor="password">Пароль:</label>
-        <input
+        <Input
           type="password"
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button type="submit">Войти</button>
+      <Button type="submit">Войти</Button>
     </form>
   );
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/App.css';
-// import AuthProvider from './context/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './Layout';
 import Login from './pages/Login';
@@ -12,7 +11,8 @@ import HomeAdmin from './pages/admin/Home';
 import AuthGuard from './guards/AuthGuard';
 import { AxiosInterceptor } from './api/axios';
 import NotFound from './pages/NotFound';
-import LayoutAuth from './LayoutAuth';
+import { ConfigProvider } from 'antd';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,23 +21,25 @@ root.render(
     <Router>
       <AuthProvider>
         <AxiosInterceptor>
-          <Routes>
+          <ConfigProvider>
+            <Routes>
 
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-            </Route>
-
-            <Route element={<AuthGuard />}>
-              <Route path="/admin" element={<Layout />}>
-                <Route index element={<HomeAdmin />} />
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
               </Route>
-            </Route>
 
-            <Route path='*' element={<NotFound />} />
+              <Route element={<AuthGuard />}>
+                <Route path="/admin" element={<Layout />}>
+                  <Route index element={<HomeAdmin />} />
+                </Route>
+              </Route>
 
-          </Routes>
+              <Route path='*' element={<NotFound />} />
+
+            </Routes>
+          </ConfigProvider>
         </AxiosInterceptor>
       </AuthProvider>
     </Router>
