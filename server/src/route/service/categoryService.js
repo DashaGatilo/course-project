@@ -1,21 +1,23 @@
-function getAllCategories() {
+const Category = require("../../model/Category");
 
+async function getAllCategories() {
+    return await Category.getAll()
 }
 
-function getCategoryById() {
-
+async function getCategoryById(categoryId) {
+    return await Category.getById(categoryId)
 }
 
-function createCategory() {
-
+async function createCategory(name, description) {
+    return await Category.create({ name, description });
 }
 
-function updateCategory() {
-
+async function updateCategory(categoryId, name, description) {
+    return await Category.update(categoryId, { name, description });
 }
 
-function deleteCategory() {
-
+async function deleteCategory(categoryId) {
+    return await Category.delete(categoryId)
 }
 
-module.exports = {getAllCategories, getCategoryById, createCategory, updateCategory, deleteCategory}
+module.exports = { getAllCategories, getCategoryById, createCategory, updateCategory, deleteCategory }

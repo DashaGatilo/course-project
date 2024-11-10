@@ -28,6 +28,19 @@ const User = {
     });
   },
 
+  // Получение пользователя по username
+  getByUsername: (username) => {
+    return new Promise((resolve, reject) => {
+      db.query('SELECT * FROM users WHERE username = ?', [username], (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result[0]);
+        }
+      });
+    });
+  },
+
   // Создание нового пользователя
   create: (data) => {
     return new Promise((resolve, reject) => {
