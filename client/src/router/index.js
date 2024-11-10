@@ -17,7 +17,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       {/* <Route path="/create-category" element={<CreateCategory />} /> */}
-      <Route path="/admin" element={<AppAdmin />} /> {/* Маршрут для админ-панели */}
+      {/* <Route path="/admin" element={<AppAdmin />} /> Маршрут для админ-панели */}
     </Route>
   )
 );

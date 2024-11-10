@@ -1,11 +1,12 @@
-import axios from 'axios';
+// import axios from 'axios';
+import { axiosClient as axios } from './axios';
 
 const API_URL = 'http://localhost:3000/api'; // Замените на URL вашего сервера
 
 const auth = {
   register: async (username, password) => {
     try {
-      const response = await axios.post(`${API_URL}/register`, { username, password });
+      const response = await axios.post(`/register`, { username, password });
       return response.data;
     } catch (error) {
       console.error('Ошибка регистрации:', error);
@@ -15,7 +16,7 @@ const auth = {
 
   login: async (username, password) => {
     try {
-      const response = await axios.post(`${API_URL}/login`, { username, password });
+      const response = await axios.post(`/login`, { username, password });
       return response.data;
     } catch (error) {
       console.error('Ошибка авторизации:', error);
@@ -26,7 +27,7 @@ const auth = {
   // Метод для восстановления пароля
   forgotPassword: async (email) => {
     try {
-      const response = await axios.post(`${API_URL}/forgot-password`, { email });
+      const response = await axios.post(`/forgot-password`, { email });
       return response.data;
     } catch (error) {
       console.error('Ошибка восстановления пароля:', error);
@@ -37,7 +38,7 @@ const auth = {
   // Метод для проверки авторизации
   isAuthenticated: async (token) => {
     try {
-      const response = await axios.get(`${API_URL}/is-authenticated`, {
+      const response = await axios.get(`/is-authenticated`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
