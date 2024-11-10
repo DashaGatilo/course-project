@@ -1,21 +1,27 @@
-function register() {
+const User = require("../../model/user");
 
+async function createUser(username, password) {
+    return await User.create({ username, password })
 }
 
-function login() {
-
+async function getUserById(userId) {
+    return await User.getById(userId);
 }
 
-function getUserById() {
-
+async function updateUser(userId, username, password, role) {
+    return await User.update(userId, { username, password, role })
 }
 
-function updateUser() {
-
+async function deleteUser(userId) {
+    await User.delete(userId);
 }
 
-function deleteUser() {
-
+async function getAllUsers() {
+    return await User.getAll()
 }
 
-module.exports = {register, login, getUserById, updateUser, deleteUser}
+async function getUserByUsername(username) {
+    return await User.getByUsername(username)
+}
+
+module.exports = {createUser, login, getUserById, updateUser, deleteUser, getUserByUsername, getAllUsers}

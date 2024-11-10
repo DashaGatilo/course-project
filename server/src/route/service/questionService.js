@@ -1,21 +1,24 @@
-function getAllQuestions() {
+const Question = require("../../model/Question");
 
+
+async function getAllQuestions() {
+    return await Question.getAll()
 }
 
-function getQuestionById() {
-
+async function getQuestionById(questionId) {
+    return await Question.getById(questionId)
 }
 
-function createQuestion() {
-
+async function createQuestion(title, content, categoryId, userId) {
+    return await Question.create({ title, content, categoryId, userId })
 }
 
-function updateQuestion() {
-
+async function updateQuestion(questionId, title, content, categoryId, userId) {
+    return await Question.update(questionId, { title, content, categoryId, userId })
 }
 
-function deleteQuestion() {
-
+async function deleteQuestion() {
+    await Question.delete(questionId);
 }
 
-module.exports = {getAllQuestions, getQuestionById, createQuestion, updateQuestion, deleteQuestion}
+module.exports = { getAllQuestions, getQuestionById, createQuestion, updateQuestion, deleteQuestion }
