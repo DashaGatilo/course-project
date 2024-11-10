@@ -12,6 +12,7 @@ import HomeAdmin from './pages/admin/Home';
 import AuthGuard from './guards/AuthGuard';
 import { AxiosInterceptor } from './api/axios';
 import NotFound from './pages/NotFound';
+import LayoutAuth from './LayoutAuth';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,16 +22,12 @@ root.render(
       <AuthProvider>
         <AxiosInterceptor>
           <Routes>
+
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
             </Route>
-
-            <Route path="/" element={<Layout />}>
-              <Route path="/test" element={<Register />} />
-            </Route>
-
 
             <Route element={<AuthGuard />}>
               <Route path="/admin" element={<Layout />}>
