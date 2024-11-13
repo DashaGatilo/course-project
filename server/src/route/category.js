@@ -5,19 +5,23 @@ const router = express.Router();
 const categoryService = require('./service/categoryService');
 const { body } = require('express-validator');
 const validationMiddleware = require('../middleware/validations');
-const authMiddleware = require('../middleware/auth');
+const hasRole = require('../middleware/auth');
 const USER_ROLE = require('../types/user');
 
-router.get('/', authMiddleware, async (req, res) => {
+router.get('/categories', hasRole(), async (req, res) => {
     try {
-        const categories = await categoryService.getAllCategories()
+        console.log("START CATEGORIES")
+        const categories = await categoryService.getAllCategories();
+        console.log("FINISH CATEGORIES")
+
         res.status(200).json(categories);
     } catch (error) {
+        console.log("error", error);
         res.status(500).json({ message: 'Ошибка при получении категорий', error });
     }
 });
 
-router.get('/:id', authMiddleware, async (req, res) => {
+router.get('/:id', hasRole(), async (req, res) => {
     try {
         const categoryId = req.params.id;
         const category = await categoryService.getCategoryById(categoryId);
@@ -28,7 +32,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
 });
 
 router.post('/',
-    authMiddleware([USER_ROLE.Admin, USER_ROLE.Manager]),
+    hasRole([USER_ROLE.Admin, USER_ROLE.Manager]),
     body('title').notEmpty(),
     body('content').notEmpty(),
     body('category_id').isNumeric(),
@@ -47,7 +51,7 @@ router.post('/',
     });
 
 router.put('/:id',
-    authMiddleware(),
+    hasRole(),
     body('title').optional().notEmpty(),
     body('content').optional().notEmpty(),
     body('category_id').optional().isNumeric(),
@@ -68,7 +72,7 @@ router.put('/:id',
       }
 );
 
-router.delete('/:id', authMiddleware([USER_ROLE.Manager, USER_ROLE.Admin]), async (req, res) => {
+router.delete('/:id', hasRole([USER_ROLE.Manager, USER_ROLE.Admin]), async (req, res) => {
     try {
       const categoryId = req.params.id;
   

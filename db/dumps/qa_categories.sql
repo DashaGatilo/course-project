@@ -29,6 +29,16 @@ CREATE TABLE `categories` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `categories` (`id`, `name`, `description`) VALUES
+(1, 'Technology', 'Items related to technology and gadgets'),
+(2, 'Books', 'Various genres and types of books'),
+(3, 'Clothing', 'Apparel for men, women, and children'),
+(4, 'Food', 'Edibles including snacks and ingredients'),
+(5, 'Sports', 'Sports equipment and activewear'),
+(6, 'Furniture', 'Home and office furniture');
+
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
