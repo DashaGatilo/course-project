@@ -34,15 +34,20 @@ export const QuestionPage = ({categoryId}) => {
             </p>
             <hr/>
             <br/>
-            <List
-                bordered
-                dataSource={answers}
-                renderItem={(item) => (
-                    <List.Item>
-                        <Typography.Text>Ответ:</Typography.Text> {item.content}
-                    </List.Item>
-                )}
-            />
+            {
+                !answers.length ?
+                    'Нет ответов'
+                    :
+                    <List
+                        bordered
+                        dataSource={answers}
+                        renderItem={(item) => (
+                            <List.Item>
+                                <Typography.Text>Ответ:</Typography.Text> {item.content}
+                            </List.Item>
+                        )}
+                    />
+            }
             <hr/>
             <Form layout='vertical' onFinish={handleCreateAnswer}>
                 <Form.Item name='answer' label='Создать ответ на вопрос'>
