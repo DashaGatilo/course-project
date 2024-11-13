@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 
-const API_URL = import.meta.env.API_URL || 'http://localhost:3000/api'; // Замените на URL вашего сервера
+const API_URL = import.meta.env.API_URL || 'http://localhost:3000'; // Замените на URL вашего сервера
 
 export const axiosClient = axios.create({
     baseURL: API_URL,

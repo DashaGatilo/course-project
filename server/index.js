@@ -3,10 +3,10 @@ const mysql = require('mysql2'); //  или  mariadb
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000; //  порт  сервера
-const answersController = require('./src/controller/AnswerController')
-const categoryController = require('./src/controller/CategoryController')
-const questionController = require('./src/controller/QuestionController')
-const userController = require('./src/controller/UserController')
+const answersController = require('./src/route/answer')
+const categoryController = require('./src/route/category')
+const questionController = require('./src/route/question')
+const userController = require('./src/route/user')
 
 
 //  Подключение  к  базе  данных  MySQL

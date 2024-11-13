@@ -2,8 +2,11 @@ const express = require('express');
 const router = express.Router();
 const userService = require('./service/userService');
 const { body } = require('express-validator');
-const validationMiddleware = require('../middleware/validation');
+const validationMiddleware = require('../middleware/validations');
 const USER_ROLE = require('../types/user');
+const authMiddleware = require('../middleware/auth');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 router.post('/user/register',
     body('username').notEmpty().isEmail(),
@@ -28,6 +31,7 @@ router.post('/user/register',
             // Возвращение данных нового пользователя
             res.status(201).json({ message: 'Пользователь успешно зарегистрирован', user: newUser });
         } catch (error) {
+            console.error(error);
             res.status(500).json({ message: 'Ошибка при регистрации пользователя', error });
         }
     });
@@ -58,6 +62,7 @@ router.post('/user/login',
             // Отправка токена
             res.status(200).json({ message: 'Авторизация успешна', token });
         } catch (error) {
+            console.error(error);
             res.status(500).json({ message: 'Ошибка при авторизации', error });
         }
     });
@@ -72,6 +77,7 @@ router.get('/user/:id', async (req, res) => {
         // Отправка данных пользователя
         res.status(200).json(user);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ message: 'Ошибка при получении данных пользователя', error });
     }
 });
@@ -86,6 +92,7 @@ router.get('/user/all', authMiddleware([USER_ROLE.Admin, USER_ROLE.Manager]), as
         // Отправка данных пользователя
         res.status(200).json(users);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ message: 'Ошибка при получении данных пользователя', error });
     }
 });

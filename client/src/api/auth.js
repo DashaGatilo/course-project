@@ -6,7 +6,7 @@ const API_URL = 'http://localhost:3000/api'; // Замените на URL ваш
 const auth = {
   register: async (username, password) => {
     try {
-      const response = await axios.post(`/register`, { username, password });
+      const response = await axios.post(`/user/register`, { username, password });
       return response.data;
     } catch (error) {
       console.error('Ошибка регистрации:', error);
@@ -16,7 +16,7 @@ const auth = {
 
   login: async (username, password) => {
     try {
-      const response = await axios.post(`/login`, { username, password });
+      const response = await axios.post(`/user/login`, { username, password });
       return response.data;
     } catch (error) {
       console.error('Ошибка авторизации:', error);

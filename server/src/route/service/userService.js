@@ -24,4 +24,4 @@ async function getUserByUsername(username) {
     return await User.getByUsername(username)
 }
 
-module.exports = {createUser, login, getUserById, updateUser, deleteUser, getUserByUsername, getAllUsers}
+module.exports = {createUser, getUserById, updateUser, deleteUser, getUserByUsername, getAllUsers}

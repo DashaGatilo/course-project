@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import auth from '../api/auth';
 import { useNavigate } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode';
 
 const AuthContext = createContext();
 
@@ -22,10 +23,12 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       const response = await auth.login(username, password);
-      localStorage.setItem('token', response.data.token); // Сохраните токен
-      setToken(response.data.token)
+      console.log("RESP", response);
+      localStorage.setItem('token', response.token); // Сохраните токен
+      setToken(response.token)
+      const tokenInfo = jwtDecode(token);
+      setUser(tokenInfo.userId);
       setIsAuthenticated(true);
-      setUser(response.data.user);
       navigate('/'); // Перенаправляем на главную страницу
     } catch (error) {
       console.error('Ошибка авторизации:', error);

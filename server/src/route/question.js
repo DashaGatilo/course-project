@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const questionService = require('./service/questionService');
 const { body } = require('express-validator');
-const validationMiddleware = require('../middleware/validation');
+const validationMiddleware = require('../middleware/validations');
 const authMiddleware = require('../middleware/auth');
 const USER_ROLE = require('../types/user');
 

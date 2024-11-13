@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  mysql:
+    build:
+      context: ./db
+    container_name: my_mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: QA
+      MYSQL_USER: root1
+      MYSQL_PASSWORD: root123
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/dumps:/docker-entrypoint-initdb.d
+    restart: unless-stopped
