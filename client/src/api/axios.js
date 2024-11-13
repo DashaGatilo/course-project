@@ -6,7 +6,8 @@ const API_URL = import.meta.env.API_URL || 'http://localhost:3000'; // Заме�
 
 export const axiosClient = axios.create({
     baseURL: API_URL,
-});
+})
+
 
 
 const AxiosInterceptor = ({ children }) => {
@@ -14,6 +15,7 @@ const AxiosInterceptor = ({ children }) => {
     useEffect(() => {
         const interceptorRequest = axiosClient.interceptors.request.use(
             (config) => {
+                const token = localStorage.getItem('token')
                 console.log("🚀 ~ useEffect ~ config:", config)
                 if (!token) return config;
                 config.headers['Authorization'] = `Bearer ${token}`;

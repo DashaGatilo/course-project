@@ -7,16 +7,18 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem("token") || "123");
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
+      setToken(token);
       // Проверка токена (может потребовать дополнительного запроса на сервер)
       setIsAuthenticated(true);
-      setUser({ username: 'Пример' }); // Замените на реальные данные
+      const tokenInfo = jwtDecode(token);
+      setUser(tokenInfo.userId);
     }
   }, []);
 
@@ -26,7 +28,7 @@ export const AuthProvider = ({ children }) => {
       console.log("RESP", response);
       localStorage.setItem('token', response.token); // Сохраните токен
       setToken(response.token)
-      const tokenInfo = jwtDecode(token);
+      const tokenInfo = jwtDecode(response.token);
       setUser(tokenInfo.userId);
       setIsAuthenticated(true);
       navigate('/'); // Перенаправляем на главную страницу
