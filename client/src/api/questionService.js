@@ -5,7 +5,7 @@ import { axiosClient as axios } from './axios';
 
 const questionService = {
   getAllQuestions: async () => {
-    const response = await axios.get(`/questions`);
+    const response = await axios.post(`/questions-1`);
     return response.data;
   },
   getQuestionById: async (id) => {

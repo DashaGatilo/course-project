@@ -8,9 +8,11 @@ const validationMiddleware = require('../middleware/validations');
 const authMiddleware = require('../middleware/auth');
 const USER_ROLE = require('../types/user');
 
-router.get('/', async (req, res) => {
+router.post('/questions-1', async (req, res) => {
     try {
+        console.log("все вопросы1");
         const questions = await questionService.getAllQuestions();
+        console.log("все вопросы");
         res.status(200).json(questions);
     } catch (error) {
         res.status(500).json({ message: 'Ошибка при получении вопросов', error });
@@ -27,8 +29,8 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/',
-    authMiddleware,
+router.post('/questions',
+    authMiddleware(),
     body('title').notEmpty(),
     body('content').notEmpty(),
     body('category_id').isNumeric(),

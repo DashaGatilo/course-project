@@ -10,15 +10,15 @@ async function getQuestionById(questionId) {
 }
 
 async function createQuestion(title, content, categoryId, userId) {
-    return await Question.create({ title, content, categoryId, userId })
+    return await Question.create({title, content, 'category_id': categoryId, 'user_id': userId})
 }
 
 async function updateQuestion(questionId, title, content, categoryId, userId) {
-    return await Question.update(questionId, { title, content, categoryId, userId })
+    return await Question.update(questionId, {title, content, categoryId, userId})
 }
 
 async function deleteQuestion() {
     await Question.delete(questionId);
 }
 
-module.exports = { getAllQuestions, getQuestionById, createQuestion, updateQuestion, deleteQuestion }
+module.exports = {getAllQuestions, getQuestionById, createQuestion, updateQuestion, deleteQuestion}

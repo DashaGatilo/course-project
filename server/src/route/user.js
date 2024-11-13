@@ -82,7 +82,7 @@ router.get('/user/:id', async (req, res) => {
     }
 });
 
-router.get('/user/all', authMiddleware([USER_ROLE.Admin, USER_ROLE.Manager]), async (req, res) => {
+router.post('/user/all', authMiddleware([USER_ROLE.Admin, USER_ROLE.Manager]), async (req, res) => {
     try {
         const userId = req.params.id;
 

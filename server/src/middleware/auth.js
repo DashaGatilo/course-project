@@ -6,7 +6,7 @@ const userDb = require("../model/user")
 function hasRole(role) {
     return function (req, res, next) {
         const token = req.headers.authorization?.split(' ')[1];
-        console.log("START MIDDLE", req.headers.authorization)
+        console.log("START MIDDLE", req.url)
 
         if (token) {
             jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
@@ -15,9 +15,9 @@ function hasRole(role) {
                     return res.status(401).json({ message: 'Неверный токен' });
                 }
                 req.userId = decoded.userId;
-                if (role?.length) {
-                    const user = userDb.getById(userId).then((user) => {user})
-                }
+                // if (role?.length) {
+                //     const user = userDb.getById(userId).then((user) => {user})
+                // }
                 console.log("FINISH MIDDLE")
                 next();
             });

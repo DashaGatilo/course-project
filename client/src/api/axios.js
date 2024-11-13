@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {useEffect} from 'react';
-import {useAuth} from '../context/AuthContext';
-
+import {useAuth} from '../auth/AuthContext';
+import {notification} from 'antd'
 const API_URL = import.meta.env.API_URL || 'http://localhost:3000'; // Замените на URL вашего сервера
 
 export const axiosClient = axios.create({
@@ -27,7 +27,11 @@ const AxiosInterceptor = ({children}) => {
     useEffect(() => {
         function listener(event) {
             const error = event.reason;
+
             if (error?.response?.status === 401) {
+                notification.error({
+                    message:"У вас нет прав доступа"
+                })
                 logout();
             }
         }

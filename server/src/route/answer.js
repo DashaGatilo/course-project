@@ -8,7 +8,7 @@ const validationMiddleware = require('../middleware/validations');
 const authMiddleware = require('../middleware/auth');
 const USER_ROLE = require('../types/user');
 
-router.get('/answers/:questionId', authMiddleware, async (req, res) => {
+router.get('/answers/:questionId', authMiddleware(), async (req, res) => {
     try {
         const questionId = req.params.questionId;
         const answers = await answerService.getAnswersByQuestionId(questionId)
@@ -27,8 +27,8 @@ router.get('/answers/all', async (req, res) => {
     }
 })
 
-router.post('/',
-    authMiddleware,
+router.post('/answers',
+    authMiddleware(),
     body('question_id').isNumeric(),
     body('content').notEmpty(),
     validationMiddleware,
