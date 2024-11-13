@@ -8,12 +8,8 @@ function Home() {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      try {
-        const data = await categoryService.getAllCategories();
-        setCategories(data);
-      } catch (error) {
-        console.error('Ошибка при получении категорий:', error);
-      }
+      const data = await categoryService.getAllCategories();
+      setCategories(data);
     };
 
     fetchCategories();
