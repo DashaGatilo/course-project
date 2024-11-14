@@ -11,7 +11,7 @@ export const ProfilePage = () => {
 
     const {data: users} = useStore(userService.getAll, []);
 
-    const isDeleteAllow = user === id || userRole === 'Admin';
+    const hasPermissions = user === id || userRole === 'Admin';
 
     const userData = users.find(it => it.id === Number(userId));
 
@@ -21,7 +21,7 @@ export const ProfilePage = () => {
 
     return (
         <div>
-            {isDeleteAllow ? <Button type="primary" onClick={handleDelete}>Удалить</Button> : null}
+            {hasPermissions ? <Button type="primary" onClick={handleDelete}>Удалить</Button> : null}
             {userData?.username}
             <Card/>
         </div>

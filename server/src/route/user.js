@@ -57,7 +57,7 @@ router.post('/user/login',
             }
 
             // Генерация токена
-            const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            const token = jwt.sign({ userId: user.id, userRole: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
             // Отправка токена
             res.status(200).json({ message: 'Авторизация успешна', token });
