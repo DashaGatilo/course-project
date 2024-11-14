@@ -44,7 +44,7 @@ router.post('/answers',
 );
 
 router.put('/:id',
-    authMiddleware,
+    authMiddleware(),
     body('content').notEmpty(),
     validationMiddleware,
     async (req, res) => {
@@ -62,7 +62,7 @@ router.put('/:id',
     }
 );
 
-router.delete('/:id', authMiddleware, async (req, res) => {
+router.delete('/:id', authMiddleware(), async (req, res) => {
     try {
         const answerId = req.params.id;
         const userId = req.userId

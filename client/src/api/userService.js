@@ -9,6 +9,11 @@ const userService = {
         return response.data;
     },
 
+    delete: async (id) => {
+        const response = await axios.delete(`/user/${id}`);
+        return response.data;
+    },
+
 };
 
 export default userService;

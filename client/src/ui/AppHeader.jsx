@@ -11,7 +11,7 @@ function onlyForRoles(roles) {
 }
 
 function AppHeader() {
-    const {isAuthenticated, userRole} = useAuth();
+    const {isAuthenticated, userRole, logout} = useAuth();
     const navigate = useNavigate();
     const {goToCreateQuestion, goToAllQuestion} = useQuestionsNavigation();
 
@@ -35,6 +35,7 @@ function AppHeader() {
 
                     {isAuthenticated && <Button onClick={goToCreateQuestion}>Создать вопрос</Button>}
                     {isAuthenticated && <Button onClick={goToAllQuestion}>Вопросы</Button>}
+                    {isAuthenticated && <Button onClick={() => logout()}>Выйти</Button>}
                     <GoToUsersPageLink/>
 
                 </div>

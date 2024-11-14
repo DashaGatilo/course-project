@@ -8,6 +8,6 @@ export const onlyForAdmin = (Component) => (props) => {
     if (userRole === 'Admin') {
         return <Component {...props} />;
     } else {
-        return 'Gui'
+        return ''
     }
 };

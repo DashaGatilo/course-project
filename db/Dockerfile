@@ -9,7 +9,7 @@ COPY ./dumps /docker-entrypoint-initdb.d/
 # MySQL запускает все скрипты *.sql, *.sh и *.sql.gz в этой папке при первом старте.
 
 # Порты, которые будут открыты для доступа
-EXPOSE 3306:3306
+EXPOSE 3306
 
 # Завершаем создание Dockerfile
 CMD ["mysqld"]

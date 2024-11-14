@@ -3,11 +3,13 @@ import {useParams} from "react-router-dom";
 import {Button, Card, notification} from "antd";
 import {useStore} from "../../store/useStore";
 import userService from "../../api/userService";
+import {useUserNavigate} from "../admin/useUserNavigate";
 
 export const ProfilePage = () => {
     const {user, userRole} = useAuth();
     const {id} = useParams();
     const userId = id ?? user;
+    const {goToUserListPage} = useUserNavigate();
 
     const {data: users} = useStore(userService.getAll, []);
 
@@ -28,9 +30,11 @@ export const ProfilePage = () => {
     )
 
     function handleDelete() {
+        userService.delete(userId)
         notification.success({
-            message: 'Удалить',
+            message: 'Пользователь удален',
             duration: 100
         })
+        goToUserListPage()
     }
 }

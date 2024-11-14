@@ -33,21 +33,6 @@ const auth = {
       console.error('Ошибка восстановления пароля:', error);
       throw error; // Перебросьте ошибку
     }
-  },
-
-  // Метод для проверки авторизации
-  isAuthenticated: async (token) => {
-    try {
-      const response = await axios.get(`/is-authenticated`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Ошибка проверки авторизации:', error);
-      throw error; // Перебросьте ошибку
-    }
   }
 };
 
