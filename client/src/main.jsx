@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './styles/App.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Layout from './ui/Layout';
 import Login from './ui/Login';
@@ -15,6 +14,7 @@ import {ConfigProvider} from 'antd';
 import {QuestionsRoute} from "./ui/question/QuestionsRoute";
 import {ProfilePage} from "./ui/profile/ProfilePage";
 import {UserList} from "./ui/admin/UserList";
+import 'antd/dist/reset.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

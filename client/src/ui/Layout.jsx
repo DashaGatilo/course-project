@@ -1,13 +1,14 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import AppHeader from './AppHeader';
+import {Layout as AntdLayout} from 'antd';
 
 function Layout() {
     return (
-        <main>
+        <AntdLayout>
             <AppHeader />
             <Outlet />
-        </main>
+        </AntdLayout>
     );
 }
 

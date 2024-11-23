@@ -1,46 +1,68 @@
 import React from 'react';
-import AppNavbarButton from './AppNavbarButton';
 import {useAuth} from "../auth/AuthContext";
-import {Button} from "antd";
+import {Button, Layout, Menu, Typography} from "antd";
 import {useQuestionsNavigation} from "./question/useQuestionsNavigation";
-import {useNavigate} from "react-router-dom";
-import {GoToUsersPageLink} from "./admin/GoToUsersPageLink";
+import {useLocation, useNavigate} from "react-router-dom";
 
-function onlyForRoles(roles) {
-
-}
+const {Header, Content, Footer} = Layout;
 
 function AppHeader() {
     const {isAuthenticated, userRole, logout} = useAuth();
-    const navigate = useNavigate();
     const {goToCreateQuestion, goToAllQuestion} = useQuestionsNavigation();
 
+    const location = useLocation();
+    const navigate = useNavigate();
+
     return (
-        <header className="app-header">
-            <div className="app-header__container">
-                <h1 className="app-header__title" onClick={() => navigate('/')}>Название приложения</h1>
-                <div className="app-header__buttons">
-                    {
-                        !isAuthenticated && <AppNavbarButton
-                            label="Вход"
-                            to="/login"
-                            icon="user-circle"
-                        />
-                    }
-                    {!isAuthenticated && <AppNavbarButton
-                        label="Регистрация"
-                        to="/register"
-                        icon="user-plus"
-                    />}
+        <Header style={{display: 'flex', alignItems: 'center'}}>
+            <Typography.Title
+                style={{color: 'gray', marginBottom: 0, cursor: 'pointer'}}
+                onClick={() => navigate('/')}
+                type='secondary'>
+                Название приложения
+            </Typography.Title>
+            <Menu
+                selectedKeys={[]}
+                theme="dark"
+                mode="horizontal"
+                defaultSelectedKeys={[location.pathname]}
+                style={{flex: 1, minWidth: 0, display: 'flex', justifyContent: 'end'}}>
+                {
+                    !isAuthenticated &&
+                    <>
+                        <Menu.Item key={1}>
+                            <Button type='primary' onClick={() => navigate('/login')}>
+                                Вход
+                            </Button>
+                        </Menu.Item>
+                        <Menu.Item key={2}>
+                            <Button type='link' onClick={() => navigate('/register')}>
+                                Регистрация
+                            </Button>
+                        </Menu.Item>
+                    </>
+                }
+                {
+                    isAuthenticated &&
+                    <>
+                        <Menu.Item key={3}>
+                            <Button onClick={goToCreateQuestion}>Создать вопрос</Button>
+                        </Menu.Item>
+                        <Menu.Item key={4}>
+                            <Button onClick={goToAllQuestion}>
+                                Вопросы
+                            </Button>
+                        </Menu.Item>
+                        <Menu.Item key='logout'>
+                            <Button onClick={() => logout()}>
+                                Выйти
+                            </Button>
+                        </Menu.Item>
+                    </>
+                }
 
-                    {isAuthenticated && <Button onClick={goToCreateQuestion}>Создать вопрос</Button>}
-                    {isAuthenticated && <Button onClick={goToAllQuestion}>Вопросы</Button>}
-                    {isAuthenticated && <Button onClick={() => logout()}>Выйти</Button>}
-                    <GoToUsersPageLink/>
-
-                </div>
-            </div>
-        </header>
+            </Menu>
+        </Header>
     );
 }
 
