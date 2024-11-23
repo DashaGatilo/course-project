@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from 'antd';
+import {Button, Space, Typography} from 'antd';
 import {useQuestionsNavigation} from "./question/useQuestionsNavigation";
 
 function Banner() {
@@ -7,15 +7,13 @@ function Banner() {
     const {goToCreateQuestion} = useQuestionsNavigation();
 
     return (
-        <section className="app-banner">
-            <div className="app-banner__container">
-                <h2 className="app-banner__title">Добро пожаловать на сайт вопросов и ответов!</h2>
-                <p className="app-banner__description">
-                    Задайте свой вопрос и получите ответ от экспертов.
-                </p>
-                <Button onClick={goToCreateQuestion}>Создать вопрос</Button>
-            </div>
-        </section>
+        <Space align='center' direction='vertical' style={{width: '100%'}}>
+            <Typography.Title level={2}>Добро пожаловать на сайт вопросов и ответов!</Typography.Title>
+            <Typography.Title level={3}>
+                Задайте свой вопрос и получите ответ от экспертов.
+            </Typography.Title>
+            <Button onClick={goToCreateQuestion}>Создать вопрос</Button>
+        </Space>
     );
 
 }
