@@ -8,7 +8,7 @@ const validationMiddleware = require('../middleware/validations');
 const hasRole = require('../middleware/auth');
 const USER_ROLE = require('../types/user');
 
-router.get('/categories', hasRole(), async (req, res) => {
+router.get('/categories', async (req, res) => {
     try {
         console.log("START CATEGORIES")
         const categories = await categoryService.getAllCategories();
