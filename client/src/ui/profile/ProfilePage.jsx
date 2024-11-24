@@ -28,7 +28,7 @@ export const ProfilePage = () => {
                     Имя: {userData?.username}
                 </Typography.Title>
                 <Typography.Title level={2}>
-                    Имя: {userData?.role}
+                    Роль: {userData?.role}
                 </Typography.Title>
                 {hasPermissions ? <Button type="primary" onClick={handleDelete}>Удалить</Button> : null}
             </Col>
