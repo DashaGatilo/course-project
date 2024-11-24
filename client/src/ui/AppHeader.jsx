@@ -4,6 +4,8 @@ import {Button, Layout, Menu, Typography} from "antd";
 import {useQuestionsNavigation} from "./question/useQuestionsNavigation";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useProfileNavigation} from "./profile/useProfileNavigation";
+import {DisplayForAdmin} from "./DisplayForRole";
+import {useUserNavigate} from "./admin/useUserNavigate";
 
 const {Header, Content, Footer} = Layout;
 
@@ -11,6 +13,7 @@ function AppHeader() {
     const {isAuthenticated, userRole, logout} = useAuth();
     const {goToCreateQuestion, goToAllQuestion} = useQuestionsNavigation();
     const {goToMyProfile} = useProfileNavigation();
+    const {goToUserListPage} = useUserNavigate();
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -47,6 +50,13 @@ function AppHeader() {
                 {
                     isAuthenticated &&
                     <>
+                        <DisplayForAdmin>
+                            <Menu.Item key='users'>
+                                <Button onClick={goToUserListPage}>
+                                    Список пользователей
+                                </Button>
+                            </Menu.Item>
+                        </DisplayForAdmin>
                         <Menu.Item key={3}>
                             <Button onClick={goToCreateQuestion}>Создать вопрос</Button>
                         </Menu.Item>
@@ -67,7 +77,6 @@ function AppHeader() {
                         </Menu.Item>
                     </>
                 }
-
             </Menu>
         </Header>
     );

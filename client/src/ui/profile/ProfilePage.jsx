@@ -13,7 +13,7 @@ export const ProfilePage = () => {
 
     const {data: users} = useStore(userService.getAll, []);
 
-    const hasPermissions = user === id || userRole === 'Admin';
+    const hasPermissions = user === id || userRole === 'admin';
 
     const userData = users.find(it => it.id === Number(userId));
 

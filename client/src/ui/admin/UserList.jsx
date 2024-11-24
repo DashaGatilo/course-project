@@ -7,6 +7,7 @@ import {useUserNavigate} from "./useUserNavigate";
 export const UserList = onlyForAdmin(() => {
     const {data: users} = useStore(userService.getAll, []);
     const {goToUser} = useUserNavigate();
+
     return (
         <List
             itemLayout="horizontal"
