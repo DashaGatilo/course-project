@@ -71,23 +71,26 @@ export const QuestionPage = () => {
                         }
                     </Col>
                 </Row>
-                <OnlyAuthorized>
-                    <Row>
-                        <Col span={24}>
-                            <Typography.Title level={3}>
-                                Добавить ответ на вопрос
-                            </Typography.Title>
-                            <Form form={form} layout='vertical' onFinish={handleCreateAnswer}>
-                                <Form.Item name='answer' label='Ответ'>
-                                    <Input.TextArea/>
-                                </Form.Item>
-                                <Button htmlType='submit'>
-                                    Ответить
-                                </Button>
-                            </Form>
-                        </Col>
-                    </Row>
-                </OnlyAuthorized>
+                {
+                    question.status === 'pending' &&
+                    <OnlyAuthorized>
+                        <Row>
+                            <Col span={24}>
+                                <Typography.Title level={3}>
+                                    Добавить ответ на вопрос
+                                </Typography.Title>
+                                <Form form={form} layout='vertical' onFinish={handleCreateAnswer}>
+                                    <Form.Item name='answer' label='Ответ'>
+                                        <Input.TextArea/>
+                                    </Form.Item>
+                                    <Button htmlType='submit'>
+                                        Ответить
+                                    </Button>
+                                </Form>
+                            </Col>
+                        </Row>
+                    </OnlyAuthorized>
+                }
             </Col>
         </Row>
     )
