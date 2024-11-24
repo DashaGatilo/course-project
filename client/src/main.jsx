@@ -15,6 +15,8 @@ import {QuestionsRoute} from "./ui/question/QuestionsRoute";
 import {ProfilePage} from "./ui/profile/ProfilePage";
 import {UserList} from "./ui/admin/UserList";
 import 'antd/dist/reset.css';
+import {CategoryList} from "./ui/category/CategoryList";
+import {CreateCategory} from "./ui/category/CreateCategory";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -32,6 +34,8 @@ root.render(
                             <Route path='users' element={<UserList/>}/>
                             <Route path='profile/:id' element={<ProfilePage/>}/>
                             <Route path='profile' element={<ProfilePage/>}/>
+                            <Route path='categories' element={<CategoryList/>}/>
+                            <Route path='create-category' element={<CreateCategory/>}/>
                         </Route>
 
                         <Route element={<AuthGuard/>}>

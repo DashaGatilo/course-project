@@ -4,7 +4,7 @@ import {Button, Layout, Menu, Typography} from "antd";
 import {useQuestionsNavigation} from "./question/useQuestionsNavigation";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useProfileNavigation} from "./profile/useProfileNavigation";
-import {DisplayForAdmin} from "./DisplayForRole";
+import {DisplayForAdmin, DisplayForManager} from "./DisplayForRole";
 import {useUserNavigate} from "./admin/useUserNavigate";
 
 const {Header, Content, Footer} = Layout;
@@ -57,6 +57,20 @@ function AppHeader() {
                                 </Button>
                             </Menu.Item>
                         </DisplayForAdmin>
+                        <DisplayForManager>
+                            <Menu.Item key='categories'>
+                                <Button onClick={() => navigate('/categories')}>
+                                    Список категорий
+                                </Button>
+                            </Menu.Item>
+                        </DisplayForManager>
+                        <DisplayForManager>
+                            <Menu.Item key='create-category'>
+                                <Button onClick={() => navigate('/create-category')}>
+                                    Создать категорию
+                                </Button>
+                            </Menu.Item>
+                        </DisplayForManager>
                         <Menu.Item key={3}>
                             <Button onClick={goToCreateQuestion}>Создать вопрос</Button>
                         </Menu.Item>

@@ -31,16 +31,15 @@ router.get('/:id', hasRole(), async (req, res) => {
       }
 });
 
-router.post('/',
+router.post('/categories',
     hasRole([USER_ROLE.Admin, USER_ROLE.Manager]),
     body('title').notEmpty(),
     body('content').notEmpty(),
-    body('category_id').isNumeric(),
     validationMiddleware,
     async (req, res) => {
         try {
-            const { name, description } = req.body;
-        
+            const { title: name, content: description } = req.body;
+
             // Создание новой категории
             const newCategory = await categoryService.createCategory(name, description)
             // Отправка данных новой категории
@@ -60,10 +59,10 @@ router.put('/:id',
         try {
           const categoryId = req.params.id;
           const { name, description } = req.body;
-      
+
           // Обновление категории
           const updatedCategory = await categoryService.updateCategory(categoryId, name, description)
-      
+
           // Отправка данных обновленной категории
           res.status(200).json({ message: 'Категория успешно обновлена', category: updatedCategory });
         } catch (error) {
@@ -75,10 +74,10 @@ router.put('/:id',
 router.delete('/categories/:id', hasRole([USER_ROLE.Manager, USER_ROLE.Admin]), async (req, res) => {
     try {
       const categoryId = req.params.id;
-  
+
       // Удаление категории
       await categoryService.deleteCategory(categoryId);
-  
+
       // Отправка сообщения об успешном удалении
       res.status(200).json({ message: 'Категория успешно удалена' });
     } catch (error) {
