@@ -30,6 +30,9 @@ export const QuestionPage = () => {
                         <Typography.Title level={2}>
                             {question.title}
                         </Typography.Title>
+                        <Typography.Text type='secondary' level={2}>
+                            Статус: {question.status}
+                        </Typography.Text>
                     </Col>
                 </Row>
                 <Row>
