@@ -62,7 +62,7 @@ router.put('/:id',
     }
 );
 
-router.delete('/:id', authMiddleware(), async (req, res) => {
+router.delete('answers/:id', authMiddleware(USER_ROLE.Admin), async (req, res) => {
     try {
         const answerId = req.params.id;
         const userId = req.userId

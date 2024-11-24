@@ -7,8 +7,12 @@ import {useAuth} from "../../auth/AuthContext";
 import {formatDate} from "../../util/formatDate";
 import {OnlyAuthorized} from "../OnlyAuthorized";
 import {ResolveQuestionButton} from "../manager/ResolveQuestionButton";
+import {DisplayForAdmin} from "../DisplayForRole";
+import {useQuestionsNavigation} from "./useQuestionsNavigation";
 
 export const QuestionPage = () => {
+    const {goToAllQuestion} = useQuestionsNavigation();
+
     const {id} = useParams();
     const {user} = useAuth();
     const {data: questions, refresh: refreshQuestion} = useStore(questionService.getAllQuestions, []);
@@ -41,6 +45,11 @@ export const QuestionPage = () => {
                         <Row>
                             <ResolveQuestionButton question={question} onSuccess={refreshQuestion}/>
                         </Row>
+                        <DisplayForAdmin>
+                            <Button onClick={handleDelete}>
+                                Удалить
+                            </Button>
+                        </DisplayForAdmin>
                     </Col>
                 </Row>
                 <Row>
@@ -104,6 +113,20 @@ export const QuestionPage = () => {
                 })
             }).then(refreshAnswers);
         }
+    }
+
+    async function handleDelete() {
+        if (answers.length) {
+            await Promise.all(answers.map(it => {
+                return answerService.deleteById(it.id)
+            }))
+        }
+        await questionService.deleteQuestion(question.id);
+
+        notification.success({
+            message: 'Вопрос и ответы удалены'
+        })
+        goToAllQuestion()
     }
 
 }

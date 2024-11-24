@@ -15,6 +15,10 @@ const questionService = {
         const response = await axios.get(`/answers/${questionId}`);
         return response.data;
     },
+    deleteById: async (id) => {
+        const response = await axios.delete(`/admin/${id}`);
+        return response.data;
+    },
 };
 
 export default questionService;
