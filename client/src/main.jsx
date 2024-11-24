@@ -11,12 +11,14 @@ import AuthGuard from './auth/AuthGuard';
 import {AxiosInterceptor} from './api/axios';
 import NotFound from './ui/NotFound';
 import {ConfigProvider} from 'antd';
-import {QuestionsRoute} from "./ui/question/QuestionsRoute";
 import {ProfilePage} from "./ui/profile/ProfilePage";
 import {UserList} from "./ui/admin/UserList";
 import 'antd/dist/reset.css';
 import {CategoryList} from "./ui/category/CategoryList";
 import {CreateCategory} from "./ui/category/CreateCategory";
+import {QuestionList} from "./ui/question/QuestionList";
+import {QuestionPage} from "./ui/question/QuestionPage";
+import {QuestionFormPage} from "./ui/question/QuestionFormPage";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -36,6 +38,9 @@ root.render(
                             <Route path='profile' element={<ProfilePage/>}/>
                             <Route path='categories' element={<CategoryList/>}/>
                             <Route path='create-category' element={<CreateCategory/>}/>
+                            <Route path='questions' element={<QuestionList filtered/>}/>
+                            <Route path="questions/:id" element={<QuestionPage/>}/>
+                            <Route path='questions/create-question' element={<QuestionFormPage/>}/>
                         </Route>
 
                         <Route element={<AuthGuard/>}>
@@ -43,9 +48,7 @@ root.render(
                                 <Route index element={<HomeAdmin/>}/>
                             </Route>
                         </Route>
-
-                        <Route path='questions/*' element={<QuestionsRoute/>}/>
-
+                        
                         <Route path='*' element={<NotFound/>}/>
 
                     </Routes>
