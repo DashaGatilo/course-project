@@ -1,10 +1,9 @@
 import {useParams} from "react-router-dom";
 import {useStore} from "../../store/useStore";
 import questionService from "../../api/questionService";
-import {Button, Form, Input, List, notification, Typography} from "antd";
+import {Button, Col, Form, Input, List, notification, Row, Typography} from "antd";
 import answerService from "../../api/answerService";
 import {useAuth} from "../../auth/AuthContext";
-import {useRef} from "react";
 
 export const QuestionPage = ({categoryId}) => {
     const {id} = useParams();
@@ -20,44 +19,62 @@ export const QuestionPage = ({categoryId}) => {
         return question.categoryId === categoryId
     }).find(it => it.id === Number(id));
 
-    const ref = useRef();
-
     if (!question) {
         return '';
     }
 
     return (
-        <div ref={ref}>
-            <h2>{question.title}</h2>
-            <p>
-                {question.content}
-            </p>
-            <hr/>
-            <br/>
-            {
-                !answers.length ?
-                    'Нет ответов'
-                    :
-                    <List
-                        bordered
-                        dataSource={answers}
-                        renderItem={(item) => (
-                            <List.Item>
-                                <Typography.Text>Ответ:</Typography.Text> {item.content}
-                            </List.Item>
-                        )}
-                    />
-            }
-            <hr/>
-            <Form layout='vertical' onFinish={handleCreateAnswer}>
-                <Form.Item name='answer' label='Создать ответ на вопрос'>
-                    <Input.TextArea/>
-                </Form.Item>
-                <Button htmlType='submit'>
-                    Ответить
-                </Button>
-            </Form>
-        </div>
+        <Row>
+            <Col offset={6} span={12}>
+                <Row>
+                    <Col span={24}>
+                        <Typography.Title level={2}>
+                            {question.title}
+                        </Typography.Title>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={24}>
+                        <Typography.Text>
+                            {question.content}
+                        </Typography.Text>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={24}>
+                        {
+                            !answers.length ?
+                                <Typography.Title level={3}>Нет ответов</Typography.Title>
+                                :
+                                <List
+                                    bordered
+                                    dataSource={answers}
+                                    renderItem={(item) => (
+                                        <List.Item>
+                                            <Typography.Text>Ответ:</Typography.Text> {item.content}
+                                        </List.Item>
+                                    )}
+                                />
+                        }
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={24}>
+                        <Typography.Title level={3}>
+                            Добавить ответ на вопрос
+                        </Typography.Title>
+                        <Form layout='vertical' onFinish={handleCreateAnswer}>
+                            <Form.Item name='answer' label='Ответ'>
+                                <Input.TextArea/>
+                            </Form.Item>
+                            <Button htmlType='submit'>
+                                Ответить
+                            </Button>
+                        </Form>
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
     )
 
     function handleCreateAnswer({answer}) {
