@@ -1,7 +1,7 @@
 import React from 'react';
 import {useStore} from "../../store/useStore";
 import questionService from "../../api/questionService";
-import {Button, Card, Col, Empty, Row, Segmented,} from "antd";
+import {Button, Card, Col, Empty, Input, Row, Segmented,} from "antd";
 import categoryService from "../../api/categoryService";
 import {useQuestionsNavigation} from "./useQuestionsNavigation";
 import {useSearchParams} from "react-router-dom";
@@ -10,6 +10,7 @@ export const QuestionList = ({filtered, lastCount}) => {
     const {goToQuestionPage} = useQuestionsNavigation();
     const [searchParams, setSearchParams] = useSearchParams();
     const categoryId = searchParams.get('categoryId');
+    const [searchText, setSearchText] = React.useState(searchParams.get('search'));
 
     const {data: questions} = useStore(async () => {
         const questions = await questionService.getAllQuestions();
@@ -29,6 +30,12 @@ export const QuestionList = ({filtered, lastCount}) => {
         } else {
             return true;
         }
+    }).filter((it) => {
+        if (searchText) {
+            return it.title.toLowerCase().includes(searchText.toLowerCase()) || it.content.toLowerCase().includes(searchText.toLowerCase())
+        } else {
+            return true;
+        }
     });
 
     const options = categories?.map(category => ({
@@ -42,6 +49,14 @@ export const QuestionList = ({filtered, lastCount}) => {
     return (
         <Row gutter={[20, 30]}>
             <Col offset={3} span={18}>
+                <Row>
+                    {
+                        filtered &&
+                        <Input
+                            placeholder='Поиск' value={searchText}
+                            onChange={(e) => handleChangeSearch(e.target.value)}/>
+                    }
+                </Row>
                 {filtered &&
                     <Row>
                         <Col offset={3} span={18}>
@@ -74,10 +89,23 @@ export const QuestionList = ({filtered, lastCount}) => {
         return categories.find(c => c.id === categoryId);
     }
 
+    function handleChangeSearch(search) {
+        const url = new URLSearchParams(searchParams);
+        if (search) {
+            url.set('search', search);
+        } else {
+            url.delete('search');
+        }
+        setSearchParams(url);
+        setSearchText(search)
+    }
+
     function updateFilter(id) {
-        const url = new URLSearchParams();
+        const url = new URLSearchParams(searchParams);
         if (id) {
             url.set('categoryId', id);
+        } else {
+            url.delete('categoryId');
         }
         setSearchParams(url);
     }
