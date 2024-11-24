@@ -6,16 +6,18 @@ import categoryService from "../../api/categoryService";
 import {useQuestionsNavigation} from "./useQuestionsNavigation";
 import {useSearchParams} from "react-router-dom";
 
-export const QuestionList = ({filtered, limit}) => {
+export const QuestionList = ({filtered, lastCount}) => {
     const {goToQuestionPage} = useQuestionsNavigation();
     const [searchParams, setSearchParams] = useSearchParams();
     const categoryId = searchParams.get('categoryId');
 
     const {data: questions} = useStore(async () => {
-        if (!limit) {
-            return await questionService.getAllQuestions();
+        const questions = await questionService.getAllQuestions();
+
+        if (!lastCount) {
+            return questions;
         } else {
-            return (await questionService.getAllQuestions()).slice(0, limit);
+            return questions.slice(questions.length - lastCount).reverse();
         }
     }, []);
 
