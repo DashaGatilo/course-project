@@ -50,7 +50,9 @@ export const QuestionPage = () => {
                                     renderItem={(item) => (
                                         <List.Item>
                                             <Typography.Text>Ответ: {item.content}</Typography.Text>
-                                            <Typography.Text>Создан:{formatDate(item.created_at)}</Typography.Text>
+                                            <Typography.Text>
+                                                Дата создания: {formatDate(item.created_at)}
+                                            </Typography.Text>
                                         </List.Item>
                                     )}
                                 />
