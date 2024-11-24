@@ -22,7 +22,7 @@ function Home() {
                         <Typography.Title level={2}>
                             Последние вопросы
                         </Typography.Title>
-                        <QuestionList limit={3}/>
+                        <QuestionList lastCount={3}/>
                     </Row>
                 </Row>
             </Col>
