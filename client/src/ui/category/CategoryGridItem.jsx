@@ -1,12 +1,12 @@
 import React from 'react';
+import {Card} from "antd";
 
-function CategoryGridItem({ category }) {
-  return (
-    <div className="app-category-grid-item">
-      <h3 className="app-category-grid-item__title">{category.name}</h3>
-      {/* Добавьте сюда контент для категории */}
-    </div>
-  );
+function CategoryGridItem({category}) {
+    return (
+        <Card title={category.name}>
+            {category.description}
+        </Card>
+    );
 }
 
 export default CategoryGridItem;

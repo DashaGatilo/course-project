@@ -11,22 +11,18 @@ export const QuestionList = () => {
     const {data: categories} = useStore(categoryService.getAllCategories, []);
 
     return (
-        <Row>
-            <Col offset={3} span={18}>
-                <Row gutter={[16, 24]}>
-                    {
-                        questions.map(it => (
-                            <Col span={7}>
-                                <QuestionView
-                                    question={it} getCategoryById={getCategoryById}
-                                    goToQuestionPage={goToQuestionPage}/>
-                            </Col>
-                        ))
-                    }
-                </Row>
-            </Col>
-
+        <Row gutter={[20, 20]} wrap='wrap'>
+            {
+                questions.map(it => (
+                    <Col key={it.id}>
+                        <QuestionView
+                            question={it} getCategoryById={getCategoryById}
+                            goToQuestionPage={goToQuestionPage}/>
+                    </Col>
+                ))
+            }
         </Row>
+
     )
 
     function getCategoryById(categoryId) {
