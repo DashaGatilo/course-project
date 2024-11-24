@@ -14,6 +14,8 @@ export const QuestionPage = () => {
 
     const question = questions.find(it => it.id === Number(id));
 
+    const [form] = Form.useForm();
+
     if (!question) {
         return '';
     }
@@ -58,7 +60,7 @@ export const QuestionPage = () => {
                         <Typography.Title level={3}>
                             Добавить ответ на вопрос
                         </Typography.Title>
-                        <Form layout='vertical' onFinish={handleCreateAnswer}>
+                        <Form form={form} layout='vertical' onFinish={handleCreateAnswer}>
                             <Form.Item name='answer' label='Ответ'>
                                 <Input.TextArea/>
                             </Form.Item>
@@ -75,6 +77,7 @@ export const QuestionPage = () => {
     function handleCreateAnswer({answer}) {
         if (answer) {
             answerService.create(id, user, answer).then(() => {
+                form.resetFields();
                 notification.success({
                     message: 'Ответ добавлен',
                 })
