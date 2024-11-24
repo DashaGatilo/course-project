@@ -13,6 +13,7 @@ export const QuestionList = ({filtered, lastCount}) => {
     const [searchText, setSearchText] = React.useState(searchParams.get('search'));
 
     // todo неотвеченные вопросы фильтр для манагера, процент вопросов и ответов по вопросов страница
+    // по каждой категории количество вопросов с ответами и отдельный график в целом
 
 
     const {data: questions} = useStore(async () => {
