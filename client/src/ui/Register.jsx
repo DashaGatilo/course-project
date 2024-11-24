@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from '../auth/AuthContext';
 import {Button, Col, Form, Input, Row, Typography} from "antd";
@@ -7,6 +7,7 @@ import {REQUIRED_RULE} from "../util/validation-rules";
 function Register() {
     const {register} = useAuth();
     const navigate = useNavigate();
+    const [error, setError] = useState('');
 
     return (
         <Row>
@@ -14,7 +15,7 @@ function Register() {
                 <Typography.Title level={2}>
                     Регистрация
                 </Typography.Title>
-                <Form layout='vertical' onFinish={handleFinish}>
+                <Form layout='vertical' onFinish={handleFinish} onChange={() => setError('')}>
                     <Form.Item
                         label='Имя пользователя:' required={true} name='username'
                         rules={[REQUIRED_RULE, {type: 'email', message: 'Введите корректный email'},]}>
@@ -23,6 +24,12 @@ function Register() {
                     <Form.Item rules={[REQUIRED_RULE]} label='Пароль' required name='password'>
                         <Input.Password/>
                     </Form.Item>
+                    {
+                        error && <Row><Typography.Text type='danger'>
+                            {error}
+                        </Typography.Text></Row>
+                    }
+
                     <Button size='large' htmlType="submit">Зарегистрироваться</Button>
                 </Form>
             </Col>
@@ -30,7 +37,13 @@ function Register() {
     );
 
     function handleFinish({username, password}) {
-        register(username, password).then(() => navigate('/'))
+        register(username, password).then(() => navigate('/')).catch(error => {
+            if (error.response?.data?.message) {
+                setError(error.response.data.message)
+            } else {
+                throw error
+            }
+        })
     }
 }
 

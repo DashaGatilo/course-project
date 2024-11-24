@@ -25,28 +25,17 @@ export const AuthProvider = ({children}) => {
     }, []);
 
     const login = async (username, password) => {
-        try {
-            const response = await auth.login(username, password);
-            console.log("RESP", response);
-            localStorage.setItem('token', response.token); // Сохраните токен
-            setToken(response.token)
-            const tokenInfo = jwtDecode(response.token);
-            setUser(tokenInfo.userId);
-            setUserRole(tokenInfo.userRole ?? 'Admin')
-            setIsAuthenticated(true);
-            navigate('/'); // Перенаправляем на главную страницу
-        } catch (error) {
-            console.error('Ошибка авторизации:', error);
-        }
+        const response = await auth.login(username, password);
+        localStorage.setItem('token', response.token); // Сохраните токен
+        setToken(response.token)
+        const tokenInfo = jwtDecode(response.token);
+        setUser(tokenInfo.userId);
+        setUserRole(tokenInfo.userRole ?? 'Admin')
+        setIsAuthenticated(true);
     };
 
     const register = async (username, password) => {
-        try {
-            await auth.register(username, password);
-            navigate('/login'); // Перенаправляем на страницу входа после успешной регистрации
-        } catch (error) {
-            console.error('Ошибка регистрации:', error);
-        }
+        await auth.register(username, password);
     };
 
     const logout = () => {
@@ -63,8 +52,6 @@ export const AuthProvider = ({children}) => {
         </AuthContext.Provider>
     );
 };
-
-export default AuthProvider;
 
 export const useAuth = () => {
     return useContext(AuthContext);
