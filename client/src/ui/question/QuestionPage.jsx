@@ -4,6 +4,7 @@ import questionService from "../../api/questionService";
 import {Button, Col, Form, Input, List, notification, Row, Typography} from "antd";
 import answerService from "../../api/answerService";
 import {useAuth} from "../../auth/AuthContext";
+import {formatDate} from "../../util/formatDate";
 
 export const QuestionPage = () => {
     const {id} = useParams();
@@ -48,7 +49,8 @@ export const QuestionPage = () => {
                                     dataSource={answers}
                                     renderItem={(item) => (
                                         <List.Item>
-                                            <Typography.Text>Ответ:</Typography.Text> {item.content}
+                                            <Typography.Text>Ответ: {item.content}</Typography.Text>
+                                            <Typography.Text>Создан:{formatDate(item.created_at)}</Typography.Text>
                                         </List.Item>
                                     )}
                                 />
