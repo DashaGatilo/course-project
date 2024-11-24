@@ -5,6 +5,7 @@ import {Button, Col, Form, Input, List, notification, Row, Typography} from "ant
 import answerService from "../../api/answerService";
 import {useAuth} from "../../auth/AuthContext";
 import {formatDate} from "../../util/formatDate";
+import {OnlyAuthorized} from "../OnlyAuthorized";
 
 export const QuestionPage = () => {
     const {id} = useParams();
@@ -59,21 +60,23 @@ export const QuestionPage = () => {
                         }
                     </Col>
                 </Row>
-                <Row>
-                    <Col span={24}>
-                        <Typography.Title level={3}>
-                            Добавить ответ на вопрос
-                        </Typography.Title>
-                        <Form form={form} layout='vertical' onFinish={handleCreateAnswer}>
-                            <Form.Item name='answer' label='Ответ'>
-                                <Input.TextArea/>
-                            </Form.Item>
-                            <Button htmlType='submit'>
-                                Ответить
-                            </Button>
-                        </Form>
-                    </Col>
-                </Row>
+                <OnlyAuthorized>
+                    <Row>
+                        <Col span={24}>
+                            <Typography.Title level={3}>
+                                Добавить ответ на вопрос
+                            </Typography.Title>
+                            <Form form={form} layout='vertical' onFinish={handleCreateAnswer}>
+                                <Form.Item name='answer' label='Ответ'>
+                                    <Input.TextArea/>
+                                </Form.Item>
+                                <Button htmlType='submit'>
+                                    Ответить
+                                </Button>
+                            </Form>
+                        </Col>
+                    </Row>
+                </OnlyAuthorized>
             </Col>
         </Row>
     )

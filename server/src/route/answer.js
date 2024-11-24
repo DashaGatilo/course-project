@@ -8,7 +8,7 @@ const validationMiddleware = require('../middleware/validations');
 const authMiddleware = require('../middleware/auth');
 const USER_ROLE = require('../types/user');
 
-router.get('/answers/:questionId', authMiddleware(), async (req, res) => {
+router.get('/answers/:questionId', async (req, res) => {
     try {
         const questionId = req.params.questionId;
         const answers = await answerService.getAnswersByQuestionId(questionId)

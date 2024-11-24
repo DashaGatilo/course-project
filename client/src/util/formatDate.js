@@ -1,3 +1,3 @@
 export function formatDate(str) {
-    return new Date(str).toLocaleString('ru-RU')
+    return new Date(str).toDateString()
 }

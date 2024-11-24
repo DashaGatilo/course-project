@@ -1,10 +1,7 @@
 import React from 'react';
-import {Button, Space, Typography} from 'antd';
-import {useQuestionsNavigation} from "./question/useQuestionsNavigation";
+import {Space, Typography} from 'antd';
 
 function Banner() {
-
-    const {goToCreateQuestion} = useQuestionsNavigation();
 
     return (
         <Space align='center' direction='vertical' style={{width: '100%'}}>
@@ -12,7 +9,6 @@ function Banner() {
             <Typography.Title level={3}>
                 Задайте свой вопрос и получите ответ от экспертов.
             </Typography.Title>
-            <Button onClick={goToCreateQuestion}>Создать вопрос</Button>
         </Space>
     );
 
