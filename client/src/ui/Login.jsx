@@ -24,11 +24,8 @@ function Login() {
                     <Form.Item rules={[REQUIRED_RULE]} label='Пароль' required name='password'>
                         <Input.Password/>
                     </Form.Item>
-                    <Row>
-                        <Col span={1} offset={20}>
-                            <Button size='large' htmlType="submit">Войти</Button>
-                        </Col>
-                    </Row>
+                    <Button size='large' htmlType="submit">Войти</Button>
+
                 </Form>
             </Col>
         </Row>
