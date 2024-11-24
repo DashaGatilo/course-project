@@ -51,7 +51,7 @@ router.post('/questions',
 );
 
 router.put('/questions/:id',
-    authMiddleware,
+    authMiddleware(),
     body('title').optional().notEmpty(),
     body('content').optional().notEmpty(),
     body('category_id').optional().isNumeric(),

@@ -8,3 +8,12 @@ export function DisplayForAdmin({children}) {
         return null;
     }
 }
+
+export function DisplayForManager({children}) {
+    const {userRole} = useAuth();
+    if (userRole === 'manager') {
+        return children
+    } else {
+        return null;
+    }
+}

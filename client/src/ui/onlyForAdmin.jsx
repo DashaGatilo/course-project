@@ -10,3 +10,13 @@ export const onlyForAdmin = (Component) => (props) => {
         return ''
     }
 };
+
+export const onlyForManager = (Component) => (props) => {
+    const {userRole} = useAuth();
+
+    if (userRole === 'manager') {
+        return <Component {...props} />;
+    } else {
+        return ''
+    }
+};

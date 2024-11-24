@@ -6,11 +6,12 @@ import answerService from "../../api/answerService";
 import {useAuth} from "../../auth/AuthContext";
 import {formatDate} from "../../util/formatDate";
 import {OnlyAuthorized} from "../OnlyAuthorized";
+import {ResolveQuestionButton} from "../manager/ResolveQuestionButton";
 
 export const QuestionPage = () => {
     const {id} = useParams();
     const {user} = useAuth();
-    const {data: questions} = useStore(questionService.getAllQuestions, []);
+    const {data: questions, refresh: refreshQuestion} = useStore(questionService.getAllQuestions, []);
 
     const {data: answers, refresh: refreshAnswers} = useStore(() => answerService.getByQuestionId(id), []);
 
@@ -27,12 +28,19 @@ export const QuestionPage = () => {
             <Col offset={6} span={12}>
                 <Row>
                     <Col span={24}>
-                        <Typography.Title level={2}>
-                            {question.title}
-                        </Typography.Title>
-                        <Typography.Text type='secondary' level={2}>
-                            Статус: {question.status}
-                        </Typography.Text>
+                        <Row>
+                            <Typography.Title level={2}>
+                                {question.title}
+                            </Typography.Title>
+                        </Row>
+                        <Row>
+                            <Typography.Text type='secondary' level={2}>
+                                Статус: {question.status}
+                            </Typography.Text>
+                        </Row>
+                        <Row>
+                            <ResolveQuestionButton question={question} onSuccess={refreshQuestion}/>
+                        </Row>
                     </Col>
                 </Row>
                 <Row>
