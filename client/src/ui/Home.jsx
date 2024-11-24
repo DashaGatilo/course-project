@@ -13,16 +13,29 @@ function Home() {
                         <Banner/>
                     </Row>
                     <Row>
-                        <Typography.Title level={2}>
-                            Категории
-                        </Typography.Title>
-                        <CategoryList/>
+                        <Col>
+                            <Row>
+                                <Typography.Title level={2}>
+                                    Категории
+                                </Typography.Title>
+                            </Row>
+                            <Row>
+                                <CategoryList/>
+                            </Row>
+                        </Col>
+
                     </Row>
                     <Row wrap='wrap'>
-                        <Typography.Title level={2}>
-                            Последние вопросы
-                        </Typography.Title>
-                        <QuestionList lastCount={3}/>
+                        <Col>
+                            <Row>
+                                <Typography.Title level={2}>
+                                    Последние вопросы
+                                </Typography.Title>
+                            </Row>
+                            <Row>
+                                <QuestionList lastCount={3}/>
+                            </Row>
+                        </Col>
                     </Row>
                 </Row>
             </Col>
