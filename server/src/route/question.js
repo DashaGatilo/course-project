@@ -50,7 +50,7 @@ router.post('/questions',
     }
 );
 
-router.put('/:id',
+router.put('/questions/:id',
     authMiddleware,
     body('title').optional().notEmpty(),
     body('content').optional().notEmpty(),
@@ -59,10 +59,10 @@ router.put('/:id',
     async (req, res) => {
         try {
             const questionId = req.params.id;
-            const { title, content, category_id, user_id } = req.body;
+            const { title, content, category_id, user_id, status } = req.body;
 
             // Обновление вопроса
-            const updatedQuestion = await questionService.updateQuestion(questionId, title, content, category_id, user_id);
+            const updatedQuestion = await questionService.updateQuestion(questionId, title, content, category_id, user_id, status);
 
             // Отправка данных обновленного вопроса
             res.status(200).json({ message: 'Вопрос успешно обновлен', question: updatedQuestion });

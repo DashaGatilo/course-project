@@ -13,11 +13,11 @@ async function createQuestion(title, content, categoryId, userId) {
     return await Question.create({title, content, 'category_id': categoryId, 'user_id': userId})
 }
 
-async function updateQuestion(questionId, title, content, categoryId, userId) {
-    return await Question.update(questionId, {title, content, categoryId, userId})
+async function updateQuestion(questionId, title, content, categoryId, userId, status) {
+    return await Question.update(questionId, {title, content, category_id: categoryId, user_id: userId, status})
 }
 
-async function deleteQuestion() {
+async function deleteQuestion(questionId) {
     await Question.delete(questionId);
 }
 
