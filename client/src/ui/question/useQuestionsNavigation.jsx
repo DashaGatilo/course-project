@@ -13,6 +13,7 @@ export function useQuestionsNavigation() {
         paths,
         goToCreateQuestion: () => navigate(paths.createQuestion),
         goToAllQuestion: () => navigate(paths.questions),
+        goToCategoryQuestions: (categoryId) => navigate(paths.questions + `?categoryId=${categoryId}`),
         goToQuestionPage: (id) => navigate(`${paths.questions}/` + id),
     }
 }

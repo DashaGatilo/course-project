@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import {useStore} from "../../store/useStore";
 import questionService from "../../api/questionService";
 import {Button, Col, Form, Input, List, notification, Row, Typography} from "antd";

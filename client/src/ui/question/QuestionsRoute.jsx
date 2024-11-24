@@ -8,8 +8,8 @@ export const QuestionsRoute = () => {
     return (
         <Routes>
             <Route element={<Layout/>}>
-                <Route index element={<QuestionList/>}/>
-                <Route path=":id" element={<QuestionPage/>}/>
+                <Route index element={<QuestionList filtered/>}/>
+                <Route path=":id" element={<QuestionPage />}/>
                 <Route path='create-question' element={<QuestionFormPage/>}/>
             </Route>
         </Routes>
