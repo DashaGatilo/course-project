@@ -3,12 +3,14 @@ import {useAuth} from "../auth/AuthContext";
 import {Button, Layout, Menu, Typography} from "antd";
 import {useQuestionsNavigation} from "./question/useQuestionsNavigation";
 import {useLocation, useNavigate} from "react-router-dom";
+import {useProfileNavigation} from "./profile/useProfileNavigation";
 
 const {Header, Content, Footer} = Layout;
 
 function AppHeader() {
     const {isAuthenticated, userRole, logout} = useAuth();
     const {goToCreateQuestion, goToAllQuestion} = useQuestionsNavigation();
+    const {goToMyProfile} = useProfileNavigation();
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -51,6 +53,11 @@ function AppHeader() {
                         <Menu.Item key={4}>
                             <Button onClick={goToAllQuestion}>
                                 Вопросы
+                            </Button>
+                        </Menu.Item>
+                        <Menu.Item key={5}>
+                            <Button onClick={goToMyProfile}>
+                                Профиль
                             </Button>
                         </Menu.Item>
                         <Menu.Item key='logout'>
