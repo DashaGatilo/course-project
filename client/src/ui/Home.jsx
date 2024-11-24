@@ -12,17 +12,17 @@ function Home() {
                     <Row>
                         <Banner/>
                     </Row>
-                    <Row wrap='wrap'>
-                        <Typography.Title level={2}>
-                            Вопросы
-                        </Typography.Title>
-                        <QuestionList/>
-                    </Row>
                     <Row>
                         <Typography.Title level={2}>
                             Категории
                         </Typography.Title>
                         <CategoryList/>
+                    </Row>
+                    <Row wrap='wrap'>
+                        <Typography.Title level={2}>
+                            Последние вопросы
+                        </Typography.Title>
+                        <QuestionList limit={3}/>
                     </Row>
                 </Row>
             </Col>
