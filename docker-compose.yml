@@ -15,3 +15,16 @@ services:
     volumes:
       - ./db/dumps:/docker-entrypoint-initdb.d
     restart: unless-stopped
+  adminer:
+    image: adminer:latest
+    container_name: adminer-ui
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: QA
+      MYSQL_USER: root1
+      MYSQL_PASSWORD: root123
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"

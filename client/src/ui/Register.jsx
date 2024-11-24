@@ -37,7 +37,7 @@ function Register() {
     );
 
     function handleFinish({username, password}) {
-        register(username, password).then(() => navigate('/')).catch(error => {
+        register(username, password).then(() => navigate('/login')).catch(error => {
             if (error.response?.data?.message) {
                 setError(error.response.data.message)
             } else {

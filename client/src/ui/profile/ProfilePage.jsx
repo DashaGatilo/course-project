@@ -1,6 +1,6 @@
 import {useAuth} from "../../auth/AuthContext";
 import {useParams} from "react-router-dom";
-import {Button, Card, Col, notification, Row, Typography} from "antd";
+import {Button, Col, notification, Row, Typography} from "antd";
 import {useStore} from "../../store/useStore";
 import userService from "../../api/userService";
 import {useUserNavigate} from "../admin/useUserNavigate";
@@ -22,10 +22,13 @@ export const ProfilePage = () => {
     }
 
     return (
-        <Row align="middle" >
+        <Row align="middle">
             <Col offset={6} span={12}>
                 <Typography.Title level={2}>
                     Имя: {userData?.username}
+                </Typography.Title>
+                <Typography.Title level={2}>
+                    Имя: {userData?.role}
                 </Typography.Title>
                 {hasPermissions ? <Button type="primary" onClick={handleDelete}>Удалить</Button> : null}
             </Col>
