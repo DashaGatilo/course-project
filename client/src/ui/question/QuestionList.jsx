@@ -1,7 +1,7 @@
 import React from 'react';
 import {useStore} from "../../store/useStore";
 import questionService from "../../api/questionService";
-import {Button, Card, Space,} from "antd";
+import {Button, Card, Col, Row,} from "antd";
 import categoryService from "../../api/categoryService";
 import {useQuestionsNavigation} from "./useQuestionsNavigation";
 
@@ -11,23 +11,38 @@ export const QuestionList = () => {
     const {data: categories} = useStore(categoryService.getAllCategories, []);
 
     return (
-        <Space direction='vertical' align='center' style={{width: '100%'}}>
-            {
-                questions.map(it => {
-                    return (
-                        <Card title={it.title} style={{width: 300}} key={it.id}
-                              extra={<Button onClick={() => goToQuestionPage(it.id)} type='link'>Подробнее...</Button>}>
-                            <p>{it.content}</p>
-                            <p>Категория: {getCategoryById(it.category_id)?.name ?? 'Отсутствует'}</p>
-                        </Card>
-                    )
-                })
-            }
+        <Row>
+            <Col offset={3} span={18}>
+                <Row gutter={[16, 24]}>
+                    {
+                        questions.map(it => (
+                            <Col span={7}>
+                                <QuestionView
+                                    question={it} getCategoryById={getCategoryById}
+                                    goToQuestionPage={goToQuestionPage}/>
+                            </Col>
+                        ))
+                    }
+                </Row>
+            </Col>
 
-        </Space>
+        </Row>
     )
 
     function getCategoryById(categoryId) {
         return categories.find(c => c.id === categoryId);
     }
+}
+
+const QuestionView = ({question, getCategoryById, goToQuestionPage}) => {
+
+    return (
+        <Card
+            title={question.title} style={{width: 300}} key={question.id}
+            extra={<Button onClick={() => goToQuestionPage(question.id)}
+                           type='link'>Подробнее...</Button>}>
+            <p>{question.content}</p>
+            <p>Категория: {getCategoryById(question.category_id)?.name ?? 'Отсутствует'}</p>
+        </Card>
+    )
 }
