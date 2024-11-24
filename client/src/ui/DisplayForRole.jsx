@@ -11,7 +11,7 @@ export function DisplayForAdmin({children}) {
 
 export function DisplayForManager({children}) {
     const {userRole} = useAuth();
-    if (userRole === 'manager') {
+    if (userRole === 'manager' || userRole === 'admin') {
         return children
     } else {
         return null;

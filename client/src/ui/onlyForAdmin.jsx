@@ -14,7 +14,7 @@ export const onlyForAdmin = (Component) => (props) => {
 export const onlyForManager = (Component) => (props) => {
     const {userRole} = useAuth();
 
-    if (userRole === 'manager') {
+    if (userRole === 'manager' || userRole === 'admin') {
         return <Component {...props} />;
     } else {
         return ''

@@ -72,7 +72,7 @@ router.put('/:id',
       }
 );
 
-router.delete('/:id', hasRole([USER_ROLE.Manager, USER_ROLE.Admin]), async (req, res) => {
+router.delete('/categories/:id', hasRole([USER_ROLE.Manager, USER_ROLE.Admin]), async (req, res) => {
     try {
       const categoryId = req.params.id;
   

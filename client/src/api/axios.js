@@ -2,6 +2,7 @@ import axios from 'axios';
 import {useEffect} from 'react';
 import {useAuth} from '../auth/AuthContext';
 import {notification} from 'antd'
+
 const API_URL = import.meta.env.API_URL || 'http://localhost:3000'; // Замените на URL вашего сервера
 
 export const axiosClient = axios.create({
@@ -30,10 +31,14 @@ const AxiosInterceptor = ({children}) => {
 
             if (error?.response?.status === 401) {
                 notification.error({
-                    message:"У вас нет прав доступа"
+                    message: "У вас нет прав доступа"
                 })
                 logout();
             }
+
+            notification.error({
+                message: 'Что-то пошло не так(((('
+            })
         }
 
         window.addEventListener('unhandledrejection', listener);

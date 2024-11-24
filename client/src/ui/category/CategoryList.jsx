@@ -5,14 +5,14 @@ import CategoryGridItem from "./CategoryGridItem";
 
 
 export const CategoryList = () => {
-    const {data} = useStore(categoryService.getAllCategories, []);
+    const {data, refresh} = useStore(categoryService.getAllCategories, []);
 
     return (
         <Row gutter={[20, 20]} wrap='wrap'>
             {
                 data.map((category) =>
                     <Col key={category.id}>
-                        <CategoryGridItem category={category}/>
+                        <CategoryGridItem category={category} onDelete={refresh}/>
                     </Col>)
             }
         </Row>
