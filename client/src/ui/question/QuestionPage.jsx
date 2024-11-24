@@ -1,23 +1,18 @@
-import {useParams, useSearchParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useStore} from "../../store/useStore";
 import questionService from "../../api/questionService";
 import {Button, Col, Form, Input, List, notification, Row, Typography} from "antd";
 import answerService from "../../api/answerService";
 import {useAuth} from "../../auth/AuthContext";
 
-export const QuestionPage = ({categoryId}) => {
+export const QuestionPage = () => {
     const {id} = useParams();
     const {user} = useAuth();
     const {data: questions} = useStore(questionService.getAllQuestions, []);
 
     const {data: answers, refresh: refreshAnswers} = useStore(() => answerService.getByQuestionId(id), []);
 
-    const question = questions.filter(it => {
-        if (!categoryId) {
-            return true;
-        }
-        return question.categoryId === categoryId
-    }).find(it => it.id === Number(id));
+    const question = questions.find(it => it.id === Number(id));
 
     if (!question) {
         return '';
