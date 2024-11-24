@@ -6,9 +6,9 @@ import {Layout as AntdLayout} from 'antd';
 
 function Layout() {
     return (
-        <AntdLayout>
+        <AntdLayout style={{height: "100vh"}}>
             <AppHeader/>
-            <AntdLayout.Content>
+            <AntdLayout.Content style={{padding: '16px'}}>
                 <Outlet/>
             </AntdLayout.Content>
         </AntdLayout>

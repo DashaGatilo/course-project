@@ -1,48 +1,42 @@
-import { Button, Input } from 'antd';
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../auth/AuthContext';
+import {Button, Col, Form, Input, Row, Typography} from 'antd';
+import React from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useAuth} from '../auth/AuthContext';
+import {REQUIRED_RULE} from "../util/validation-rules";
+
 
 function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const { login } = useAuth();
-  const navigate = useNavigate();
+    const {login} = useAuth();
+    const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      await login(username, password);
-      navigate('/'); // Перенаправляем на главную страницу после успешного логина
-    } catch (error) {
-      console.error('Ошибка авторизации:', error);
+    return (
+        <Row>
+            <Col span={12} offset={6}>
+                <Typography.Title level={2}>
+                    Вход
+                </Typography.Title>
+                <Form layout='vertical' onFinish={handleFinish}>
+                    <Form.Item
+                        label='Имя пользователя:' required={true} name='username'
+                        rules={[REQUIRED_RULE, {type: 'email', message: 'Введите корректный email'},]}>
+                        <Input/>
+                    </Form.Item>
+                    <Form.Item rules={[REQUIRED_RULE]} label='Пароль' required name='password'>
+                        <Input.Password/>
+                    </Form.Item>
+                    <Row>
+                        <Col span={1} offset={20}>
+                            <Button size='large' htmlType="submit">Войти</Button>
+                        </Col>
+                    </Row>
+                </Form>
+            </Col>
+        </Row>
+    );
+
+    function handleFinish({username, password}) {
+        login(username, password).then(() => navigate('/'))
     }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <h2>Вход</h2>
-      <div>
-        <label htmlFor="username">Имя пользователя:</label>
-        <Input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Пароль:</label>
-        <Input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <Button type="submit" onClick={handleSubmit}>Войти</Button>
-    </form>
-  );
 }
 
 export default Login;

@@ -16,40 +16,37 @@ import {ProfilePage} from "./ui/profile/ProfilePage";
 import {UserList} from "./ui/admin/UserList";
 import 'antd/dist/reset.css';
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <div className="App">
-        <Router>
-            <AuthProvider>
-                <AxiosInterceptor>
-                    <ConfigProvider>
-                        <Routes>
+    <Router>
+        <AuthProvider>
+            <AxiosInterceptor>
+                <ConfigProvider>
+                    <Routes>
 
-                            <Route path="/" element={<Layout/>}>
-                                <Route index element={<Home/>}/>
-                                <Route path="/login" element={<Login/>}/>
-                                <Route path="/register" element={<Register/>}/>
+                        <Route path="/" element={<Layout/>}>
+                            <Route index element={<Home/>}/>
+                            <Route path="/login" element={<Login/>}/>
+                            <Route path="/register" element={<Register/>}/>
 
-                                <Route path='users' element={<UserList/>}/>
-                                <Route path='profile/:id' element={<ProfilePage/>}/>
-                                <Route path='profile' element={<ProfilePage/>}/>
+                            <Route path='users' element={<UserList/>}/>
+                            <Route path='profile/:id' element={<ProfilePage/>}/>
+                            <Route path='profile' element={<ProfilePage/>}/>
+                        </Route>
+
+                        <Route element={<AuthGuard/>}>
+                            <Route path="/admin" element={<Layout/>}>
+                                <Route index element={<HomeAdmin/>}/>
                             </Route>
+                        </Route>
 
-                            <Route element={<AuthGuard/>}>
-                                <Route path="/admin" element={<Layout/>}>
-                                    <Route index element={<HomeAdmin/>}/>
-                                </Route>
-                            </Route>
+                        <Route path='questions/*' element={<QuestionsRoute/>}/>
 
-                            <Route path='questions/*' element={<QuestionsRoute/>}/>
+                        <Route path='*' element={<NotFound/>}/>
 
-                            <Route path='*' element={<NotFound/>}/>
-
-                        </Routes>
-                    </ConfigProvider>
-                </AxiosInterceptor>
-            </AuthProvider>
-        </Router>
-    </div>
+                    </Routes>
+                </ConfigProvider>
+            </AxiosInterceptor>
+        </AuthProvider>
+    </Router>
 );

@@ -31,7 +31,7 @@ function AppHeader() {
                     !isAuthenticated &&
                     <>
                         <Menu.Item key={1}>
-                            <Button type='primary' onClick={() => navigate('/login')}>
+                            <Button type='link' onClick={() => navigate('/login')}>
                                 Вход
                             </Button>
                         </Menu.Item>
