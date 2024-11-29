@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import { axiosClient as axios } from './axios';
+import {axiosClient as axios} from './axios';
 
 // const API_URL = 'http://localhost:3000/api'; // Замените на URL вашего сервера
 
@@ -9,6 +9,10 @@ const questionService = {
         const response = await axios.post(`/answers`, {
             question_id, user_id, content
         });
+        return response.data;
+    },
+    getAllAnswers: async () => {
+        const response = await axios.post(`/answers/all`);
         return response.data;
     },
     getByQuestionId: async (questionId) => {

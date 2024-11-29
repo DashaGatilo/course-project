@@ -5,12 +5,17 @@ import {Button, Card, Col, Empty, Input, Row, Segmented,} from "antd";
 import categoryService from "../../api/categoryService";
 import {useQuestionsNavigation} from "./useQuestionsNavigation";
 import {useSearchParams} from "react-router-dom";
+import {DisplayForManager} from "../DisplayForRole";
+import answerService from "../../api/answerService";
 
 export const QuestionList = ({filtered, lastCount}) => {
     const {goToQuestionPage} = useQuestionsNavigation();
     const [searchParams, setSearchParams] = useSearchParams();
     const categoryId = searchParams.get('categoryId');
     const [searchText, setSearchText] = React.useState(searchParams.get('search'));
+
+    const [onlyNotAnswer, setOnlyNotAnswer] = React.useState(false);
+    const {data: answers} = useStore(answerService.getAllAnswers, []);
 
     // todo неотвеченные вопросы фильтр для манагера, процент вопросов и ответов по вопросов страница
     // по каждой категории количество вопросов с ответами и отдельный график в целом
@@ -40,6 +45,13 @@ export const QuestionList = ({filtered, lastCount}) => {
         } else {
             return true;
         }
+    }).filter((question) => {
+        if (onlyNotAnswer) {
+            const hasAnswer = answers.some(it => it.question_id === question.id);
+            return !hasAnswer;
+        } else {
+            return true;
+        }
     });
 
     const options = categories?.map(category => ({
@@ -53,6 +65,13 @@ export const QuestionList = ({filtered, lastCount}) => {
     return (
         <Row gutter={[20, 30]}>
             <Col offset={3} span={18}>
+                <DisplayForManager>
+                    <Row>
+                        <Button onClick={toggleOnlyNotAnswer}>
+                            {!onlyNotAnswer ? 'Отобразить только вопросы без ответов' : 'Отобразить все'}
+                        </Button>
+                    </Row>
+                </DisplayForManager>
                 <Row>
                     {
                         filtered &&
@@ -88,6 +107,10 @@ export const QuestionList = ({filtered, lastCount}) => {
         </Row>
 
     )
+
+    function toggleOnlyNotAnswer() {
+        setOnlyNotAnswer(pr => !pr);
+    }
 
     function getCategoryById(categoryId) {
         return categories.find(c => c.id === categoryId);

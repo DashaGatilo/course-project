@@ -13,7 +13,7 @@ async function getAnswersByQuestionId(questionId) {
 }
 
 async function getAllAnswers() {
-  return await Answer.getAll
+  return await Answer.getAll()
 }
 
 async function deleteAnswer(answerId) {

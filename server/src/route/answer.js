@@ -18,7 +18,7 @@ router.get('/answers/:questionId', async (req, res) => {
     }
 });
 
-router.get('/answers/all', async (req, res) => {
+router.post('/answers/all', async (req, res) => {
     try {
         const answers = await answerService.getAllAnswers()
         res.status(200).json(answers);
