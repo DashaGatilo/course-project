@@ -63,6 +63,11 @@ function AppHeader() {
                                     Список категорий
                                 </Button>
                             </Menu.Item>
+                            <Menu.Item key='charts'>
+                                <Button onClick={() => navigate('/charts')}>
+                                    Статистика
+                                </Button>
+                            </Menu.Item>
                         </DisplayForManager>
                         <DisplayForManager>
                             <Menu.Item key='create-category'>

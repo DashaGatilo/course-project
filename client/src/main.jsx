@@ -19,6 +19,7 @@ import {CreateCategory} from "./ui/category/CreateCategory";
 import {QuestionList} from "./ui/question/QuestionList";
 import {QuestionPage} from "./ui/question/QuestionPage";
 import {QuestionFormPage} from "./ui/question/QuestionFormPage";
+import {ChartsPage} from "./ui/manager/ChartsPage";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -41,6 +42,7 @@ root.render(
                             <Route path='questions' element={<QuestionList filtered/>}/>
                             <Route path="questions/:id" element={<QuestionPage/>}/>
                             <Route path='questions/create-question' element={<QuestionFormPage/>}/>
+                            <Route path='charts' element={<ChartsPage/>}/>
                         </Route>
 
                         <Route element={<AuthGuard/>}>
@@ -48,7 +50,7 @@ root.render(
                                 <Route index element={<HomeAdmin/>}/>
                             </Route>
                         </Route>
-                        
+
                         <Route path='*' element={<NotFound/>}/>
 
                     </Routes>
