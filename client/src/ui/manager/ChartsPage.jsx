@@ -115,10 +115,10 @@ export const ChartsPage = () => {
 
     function getTitleToDisplayDataChart(activeDisplayData) {
         if (activeDisplayData === StatisticType.CATEGORY_TO_COUNT_QUESTION) {
-            return 'Статистика вопросов по категориям'
+            return 'Количество вопросов по категориям'
         }
         if (activeDisplayData === StatisticType.CATEGORY_TO_ANSWER) {
-            return 'Статистика ответов по категориям'
+            return 'Количество ответов по категориям'
         }
     }
 }
