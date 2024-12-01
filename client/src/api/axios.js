@@ -34,6 +34,7 @@ const AxiosInterceptor = ({children}) => {
                     message: "У вас нет прав доступа"
                 })
                 logout();
+                return;
             }
 
             notification.error({
