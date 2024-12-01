@@ -65,13 +65,16 @@ export const QuestionList = ({filtered, lastCount}) => {
     return (
         <Row gutter={[20, 30]}>
             <Col offset={3} span={18}>
-                <DisplayForManager>
-                    <Row>
-                        <Button onClick={toggleOnlyNotAnswer}>
-                            {!onlyNotAnswer ? 'Отобразить только вопросы без ответов' : 'Отобразить все'}
-                        </Button>
-                    </Row>
-                </DisplayForManager>
+                {
+                    filtered &&
+                    <DisplayForManager>
+                        <Row>
+                            <Button onClick={toggleOnlyNotAnswer}>
+                                {!onlyNotAnswer ? 'Отобразить только вопросы без ответов' : 'Отобразить все'}
+                            </Button>
+                        </Row>
+                    </DisplayForManager>
+                }
                 <Row>
                     {
                         filtered &&
