@@ -20,7 +20,7 @@ export const AuthProvider = ({children}) => {
             setIsAuthenticated(true);
             const tokenInfo = jwtDecode(token);
             setUser(tokenInfo.userId);
-            setUserRole(tokenInfo.userRole ?? 'Admin')
+            setUserRole(tokenInfo.userRole)
         }
     }, []);
 
@@ -30,7 +30,7 @@ export const AuthProvider = ({children}) => {
         setToken(response.token)
         const tokenInfo = jwtDecode(response.token);
         setUser(tokenInfo.userId);
-        setUserRole(tokenInfo.userRole ?? 'Admin')
+        setUserRole(tokenInfo.userRole)
         setIsAuthenticated(true);
     };
 
